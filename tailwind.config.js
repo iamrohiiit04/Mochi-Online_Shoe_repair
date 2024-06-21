@@ -5,6 +5,7 @@ export default {
     colors: {
       'elite-blue': '#1A314D',
       'white': '#ffffff',
+      'bright-navy-blue':'#0f6cd9',
     },
     extend: {},
   },
