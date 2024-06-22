@@ -6,6 +6,7 @@ export default {
       'elite-blue': '#1A314D',
       'white': '#ffffff',
       'bright-navy-blue':'#0f6cd9',
+      'pale-marigold': '#FCBF44',
     },
     extend: {},
   },
