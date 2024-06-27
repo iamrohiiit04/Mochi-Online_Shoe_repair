@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'elite-blue': '#1A314D',
-        'white': '#ffffff',
-        'bright-navy-blue':'#0f6cd9',
-        'pale-marigold': '#FCBF44',
+        "elite-blue": "#1A314D",
+        "bright-navy-blue": "#0f6cd9",
+        "pale-marigold": "#FCBF44",
+        "blueish": "#F9FDFF",
       },
     },
   },
