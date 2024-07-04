@@ -8,6 +8,7 @@ export default {
         "bright-navy-blue": "#0f6cd9",
         "pale-marigold": "#FCBF44",
         "blueish": "#F9FDFF",
+        "denim-blue": "#142539",
       },
     },
   },
