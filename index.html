@@ -8,6 +8,7 @@
       href="./src/img/mochi-high-resolution-logo.svg"
     />
     <link rel="stylesheet" href="style.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mochi</title>
     <style>
@@ -64,50 +65,35 @@
         </div>
         <!--Lower Part-->
         <div
-          class="flex flex-col md:flex-row justify-between items-center font-bold text-elite-blue"
+          class="md:flex md:flex-row justify-between items-center font-bold text-elite-blue"
+          x-data="{ open: false }"
         >
-          <!--Logo-->
-          <div class="mx-auto">
-            <a href="#">
-              <img
-                src="./src/img/mochi.svg"
-                alt="Mochi"
-                class="w-56 p-2 mx-auto"
-              />
-            </a>
+          <!--Logo and Hamburger Menu-->
+          <div class="mx-auto flex flex-row items-center justify-between">
+            <div>
+              <!--Logo-->
+              <a href="#">
+                <img
+                  src="./src/img/mochi.svg"
+                  alt="Mochi"
+                  class="w-56 p-2 mx-auto"
+                />
+              </a>
+            </div>
+            <!--Hamburger Menu-->
+            <div>
+              <button @click="open = !open" class=" md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              </button>
+            </div>
+            
           </div>
           <!--Navigation Bar, User and Cart-->
-          <div class="mx-auto flex flex-col md:flex-row">
-            <!--Navigation Bar-->
-            <nav class="space-x-5 flex justify-center">
-              <a
-                href="#"
-                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
-                >Home</a
-              >
-              <a
-                href="#"
-                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
-                >About</a
-              >
-              <a
-                href="#"
-                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
-                >Shop</a
-              >
-              <a
-                href="#"
-                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
-                >Pricing</a
-              >
-              <a
-                href="#"
-                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
-                >Contact</a
-              >
-            </nav>
+          <div class="mx-auto md:!flex flex-col md:flex-row z-10 relative" x-show="open" @click.away="open = false">
             <!--User & Cart-->
-            <div class="flex ml-4 p-2 md:p-0 justify-center">
+            <div class="flex flex-row ml-0 md:ml-4 p-2 md:p-0 justify-end order-1 md:order-2">
               <!--User-->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -139,6 +125,35 @@
                 />
               </svg>
             </div>
+            <!--Navigation Bar-->
+            <nav class="text-sm md:text-base flex flex-col md:flex-row space-y-3 md:space-y-0 space-x-0 md:space-x-5 items-start md:items-center md:justify-center order-2 md:order-1">
+              <a
+                href="#"
+                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
+                >Home</a
+              >
+              <a
+                href="#"
+                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
+                >About</a
+              >
+              <a
+                href="#"
+                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
+                >Shop</a
+              >
+              <a
+                href="#"
+                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
+                >Pricing</a
+              >
+              <a
+                href="#"
+                class="hover:border-b-4 hover:border-bright-navy-blue hover:rounded-sm p-1"
+                >Contact</a
+              >
+            </nav>
+            
           </div>
         </div>
       </div>
