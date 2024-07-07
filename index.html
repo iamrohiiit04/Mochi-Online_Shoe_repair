@@ -196,70 +196,64 @@
     </section>
 
     <!-- Reviews Section -->
-    <section x-data="carousel()">
-      <div class="w-4/5 mx-auto -mt-32">
-        <!-- Container -->
+  <section x-data="carousel()">
+    <div class="w-4/5 mx-auto -mt-32">
+      <!-- Container -->
+      <div>
+        <!-- Reviews Collection -->
         <div>
-          <!-- Reviews Collection -->
-          <div>
-            <!-- Reviews Flex -->
-            <div class="flex flex-row gap-x-5">
-              <!-- Review Template -->
-              <template x-for="(review, index) in reviews" :key="index">
-                <div x-show="isInCurrentSet(index)">
-                  <!-- Review Box -->
-                  <div class="border rounded-2xl shadow-2xl p-4 bg-white">
-                    <!-- Image Name and Rating -->
-                    <div class="flex justify-between">
-                      <!-- Image and Name -->
-                      <div class="flex flex-col items-start">
-                        <!-- Image -->
-                        <div>
-                          <img :src="review.image" class="rounded-full" />
-                        </div>
-                        <!-- Name -->
-                        <div>
-                          <p x-text="review.name" class="font-bold py-2"></p>
-                        </div>
+          <!-- Reviews Flex -->
+          <div class="flex flex-row gap-x-5">
+            <!-- Review Template -->
+            <template x-for="(review, index) in reviews" :key="index">
+              <div x-show="isInCurrentSet(index)" class="w-full md:w-1/3">
+                <!-- Review Box -->
+                <div class="border rounded-2xl shadow-2xl p-4 bg-white">
+                  <!-- Image Name and Rating -->
+                  <div class="flex justify-between">
+                    <!-- Image and Name -->
+                    <div class="flex flex-col items-start">
+                      <!-- Image -->
+                      <div>
+                        <img :src="review.image" class="rounded-full" alt="User Image" />
                       </div>
-                      <!-- Rating -->
-                      <div class="flex gap-0.5">
-                        <template x-for="star in 5">
-                          <svg
-                            :class="{'fill-amber-400': star <= review.rating, 'fill-gray-300': star > review.rating}"
-                            class="h-6 w-6 shrink-0"
-                            viewBox="0 0 256 256"
-                          >
-                            <path
-                              d="M239.2 97.4A16.4 16.4 0 00224.6 86l-59.4-4.1-22-55.5A16.4 16.4 0 00128 16h0a16.4 16.4 0 00-15.2 10.4L90.4 82.2 31.4 86A16.5 16.5 0 0016.8 97.4 16.8 16.8 0 0022 115.5l45.4 38.4L53.9 207a18.5 18.5 0 007 19.6 18 18 0 0020.1 0.6l46.9-29.7h0.2l50.5 31.9a16.1 16.1 0 008.7 2.6 16.5 16.5 0 0015.8-20.8l-14.3-58.1L234 115.5A16.8 16.8 0 00239.2 97.4z"
-                            >
-                            </path>
-                          </svg>
-                        </template>
+                      <!-- Name -->
+                      <div>
+                        <p x-text="review.name" class="font-bold py-2"></p>
                       </div>
                     </div>
-                    <!-- Review text -->
-                    <div>
-                      <p x-text="review.text" class="text-sm"></p>
+                    <!-- Rating -->
+                    <div class="flex gap-0.5">
+                      <template x-for="star in 5">
+                        <svg :class="{'fill-amber-400': star <= review.rating, 'fill-gray-300': star > review.rating}"
+                          class="h-6 w-6 shrink-0" viewBox="0 0 256 256">
+                          <path
+                            d="M239.2 97.4A16.4 16.4 0 00224.6 86l-59.4-4.1-22-55.5A16.4 16.4 0 00128 16h0a16.4 16.4 0 00-15.2 10.4L90.4 82.2 31.4 86A16.5 16.5 0 0016.8 97.4 16.8 16.8 0 0022 115.5l45.4 38.4L53.9 207a18.5 18.5 0 007 19.6 18 18 0 0020.1 0.6l46.9-29.7h0.2l50.5 31.9a16.1 16.1 0 008.7 2.6 16.5 16.5 0 0015.8-20.8l-14.3-58.1L234 115.5A16.8 16.8 0 00239.2 97.4z">
+                          </path>
+                        </svg>
+                      </template>
                     </div>
                   </div>
+                  <!-- Review text -->
+                  <div>
+                    <p x-text="review.text" class="text-sm"></p>
+                  </div>
                 </div>
-              </template>
-            </div>
+              </div>
+            </template>
           </div>
         </div>
-        <!-- Slider -->
-        <div class="my-8 flex justify-center">
-          <template x-for="(review, index) in reviewsChunked" :key="index">
-            <button
-              @click="currentChunk = index"
-              class="w-4 h-4 mx-1 rounded-full"
-              :class="{'bg-blue-500': currentChunk === index, 'bg-blue-300': currentChunk !== index}"
-            ></button>
-          </template>
-        </div>
       </div>
-    </section>
+      <!-- Slider -->
+      <div class="my-8 flex justify-center">
+        <template x-for="(chunk, index) in reviewsChunked" :key="index">
+          <button @click="currentChunk = index"
+            :class="{'bg-blue-500': currentChunk === index, 'bg-blue-300': currentChunk !== index}"
+            class="w-4 h-4 mx-1 rounded-full"></button>
+        </template>
+      </div>
+    </div>
+  </section>
 
     <!--Service-->
     <section>
@@ -1334,71 +1328,81 @@
     </footer>
 
     <script>
-      function carousel() {
-        return {
-          currentChunk: 0,
-          reviewsPerChunk: 3,
-          reviews: [
-            {
-              image: "./src/img/user1.jpg",
-              name: "Jenny Wilson",
-              rating: 4,
-              text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus.",
-            },
-            {
-              image: "./src/img/user2.jpg",
-              name: "Jenny Wilson",
-              rating: 4,
-              text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus.",
-            },
-            {
-              image: "./src/img/user3.jpg",
-              name: "Jenny Wilson",
-              rating: 5,
-              text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus.",
-            },
-            {
-              image: "./src/img/user4.jpg",
-              name: "Jenny Wilson",
-              rating: 3,
-              text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus.",
-            },
-            {
-              image: "./src/img/user5.jpg",
-              name: "Jenny Wilson",
-              rating: 4,
-              text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus.",
-            },
-            // Add more reviews as needed
-          ],
-
-          get reviewsChunked() {
-            const chunked = [];
-            for (let i = 0; i < this.reviews.length; i += this.reviewsPerChunk) {
-              chunked.push(this.reviews.slice(i, i + this.reviewsPerChunk));
-            }
-            return chunked;
+    function carousel() {
+      return {
+        currentChunk: 0,
+        reviewsPerChunk: 3, // Default value for md and above
+        reviews: [
+          {
+            image: "./src/img/user1.jpg",
+            name: "Jenny Wilson",
+            rating: 4,
+            text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus."
           },
-
-          isInCurrentSet(index) {
-            const start = this.currentChunk * this.reviewsPerChunk;
-            const end = start + this.reviewsPerChunk;
-            return index >= start && index < end;
+          {
+            image: "./src/img/user2.jpg",
+            name: "John Doe",
+            rating: 5,
+            text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus."
           },
-
-          startAutoSlide() {
-            setInterval(() => {
-              this.currentChunk =
-                (this.currentChunk + 1) % this.reviewsChunked.length;
-            }, 5000); // Change chunk every 5 seconds
+          {
+            image: "./src/img/user3.jpg",
+            name: "Jane Smith",
+            rating: 3,
+            text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus."
           },
-
-          init() {
-            this.startAutoSlide();
+          {
+            image: "./src/img/user4.jpg",
+            name: "Jack Brown",
+            rating: 5,
+            text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus."
           },
-        };
-      }
-    </script>
+          {
+            image: "./src/img/user5.jpg",
+            name: "Jessica Green",
+            rating: 4,
+            text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse consequatur necessitatibus odio recusandae. Tempore illo omnis delectus, eius quasi laborum! Odit nisi at saepe voluptates aut nemo quo nostrum natus."
+          },
+        ],
+
+        get reviewsChunked() {
+          const chunked = [];
+          for (let i = 0; i < this.reviews.length; i += this.reviewsPerChunk) {
+            chunked.push(this.reviews.slice(i, i + this.reviewsPerChunk));
+          }
+          return chunked;
+        },
+
+        isInCurrentSet(index) {
+          const start = this.currentChunk * this.reviewsPerChunk;
+          const end = start + this.reviewsPerChunk;
+          return index >= start && index < end;
+        },
+
+        startAutoSlide() {
+          setInterval(() => {
+            this.currentChunk = (this.currentChunk + 1) % this.reviewsChunked.length;
+          }, 5000); // Change chunk every 5 seconds
+        },
+
+        init() {
+          // Adjust reviewsPerChunk for different screen sizes
+          if (window.innerWidth < 768) {
+            this.reviewsPerChunk = 1; // For mobile view
+          } else {
+            this.reviewsPerChunk = 3; // For md and above
+          }
+          
+          this.startAutoSlide();
+        },
+      };
+    }
+
+    // Initialize the carousel
+    const myCarousel = carousel();
+    myCarousel.init();
+  </script>
+
 
   </body>
 </html>
